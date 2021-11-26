@@ -1,0 +1,16 @@
+{
+  "name": "focus-invalid-demos",
+  "version": "1.0.0",
+  "description": "simple demos of input.focus() invalid",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "launch": "npx http-server ."
+  },
+  "keywords": [
+    "focus",
+    "input"
+  ],
+  "author": "hopo-o",
+  "license": "ISC"
+}

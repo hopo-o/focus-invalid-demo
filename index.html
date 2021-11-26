@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>focus failed demo</title>
+
+  <style>
+    .modal-block {
+      visibility: hidden;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 240px;
+      height: 64px;
+      background-color: #FFF;
+      border-radius: 16px;
+      box-shadow: 0 -1px 10px #ccc;
+      padding: 32px 16px;
+    }
+
+    .modal-block.show {
+      visibility: visible;
+    }
+
+    .btn-close {
+      margin-top: 16px;
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-block">
+    Username: <input id="input_username" autofocus type="text" placeholder="来都来了就留下大名吧" />
+  </div>
+
+  <div id="modal" class="modal-block">
+    PassWord: <input id="input_password" type="password" />
+
+    <button class="btn-close" onclick="closeModal()">关闭</buttonc>
+  </div>
+
+  <br />
+
+  <div class="action-block">
+    <!-- 位于onclick的回调函数中，且同步执行 -->
+    <button onclick="focusUsername()">focus NOW</button>
+
+    <!-- onclick的回调函数中异步调用focus，IOS Safari浏览器下无效 -->
+    <button onclick="setTimeout(focusUsername, 0)">setTimeout -> focus</button>
+
+    <!-- focus时<input>元素不可见，无效 -->
+    <button onclick="focusPassWord();showModal();">focus -> show</button>
+
+    <button onclick="showModal();focusPassWord();">show -> focus</button>
+  </div>
+
+  <script>
+    function focusUsername() {
+      document.getElementById('input_username').focus()
+    }
+
+    function focusPassWord() {
+      document.getElementById('input_password').focus()
+    }
+
+    function showModal() {
+      document.getElementById('modal').classList.add('show')
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('show')
+    }
+
+    // 在非onclick位置调用，IOS Safari浏览器下无效
+    window.addEventListener('load', focusUsername)
+  </script>
+</body>
+
+</html>
